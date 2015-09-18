@@ -71,7 +71,7 @@ module AssetOSS
         
         unless options[:dry_run]
           res = Aliyun::OSS::OSSObject.store(
-            full_path(asset),
+            asset.relative_path,
             asset.data,
             oss_bucket,
             headers
