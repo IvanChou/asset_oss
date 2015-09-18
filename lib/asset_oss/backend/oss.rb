@@ -39,7 +39,11 @@ module AssetOSS
       oss_folder ? "/#{oss_folder}#{asset.fingerprint}" : asset.fingerprint
     end
     
-    def self.upload(options={})
+    def self.full_path_without_id(asset)
+      oss_folder ? "/#{oss_folder}#{asset.relative_path}" : asset.relative_path
+    end
+    
+    def self.upload(options={assetID: true})
       Asset.init(:debug => options[:debug], :nofingerprint => options[:nofingerprint])
       
       assets = Asset.find
@@ -64,9 +68,16 @@ module AssetOSS
           asset.gzip!
         end
         
+        if options[:assetID]
+          upload_path = full_path(asset)
+        else
+          upload_path = full_path_without_id(asset)
+        end
+        
         if options[:debug]
-          puts "  - Uploading: #{full_path(asset)} [#{asset.data.size} bytes]"
+          puts "  - Uploading: #{upload_path} [#{asset.data.size} bytes]"
           puts "  - Headers: #{headers.inspect}"
+          puts "  - Fingerprint: #{asset.fingerprint}"
         end
         
         unless options[:dry_run]
