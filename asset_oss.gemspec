@@ -3,11 +3,11 @@
 Gem::Specification.new do |s|
   s.name = %q{asset_oss}
   #s.version = "0.3.0"
-  s.version = "0.4.1"
+  s.version = "0.4.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["mangege", "ichou"]
-  s.date = %q{2015-09-19}
+  s.date = %q{2015-10-29}
   s.description = %q{asset_oss is a library for uploading static assets to Aliyun OSS.}
   s.email = %q{yiichou@gmail.com}
   s.files = ["LICENSE", "README.md", "README_EN.textile","lib/asset_oss.rb"] + Dir.glob('lib/asset_oss/*.rb') + Dir.glob('lib/asset_oss/backend/*.rb')

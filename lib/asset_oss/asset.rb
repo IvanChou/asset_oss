@@ -156,7 +156,7 @@ module AssetOSS
     
     def cache_hit?
       return false if @@nocache or Cache.miss? self
-      puts "AssetOSS: #{relative_path} - Cache Hit" 
+      puts "AssetOSS: #{relative_path} - Cache Hit" if @@debug
       return true 
     end
 

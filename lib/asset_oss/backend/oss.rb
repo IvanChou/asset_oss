@@ -1,6 +1,7 @@
 require 'aliyun/oss'
 
 module AssetOSS
+  
   class OSS
   
     def self.oss_config
@@ -31,6 +32,10 @@ module AssetOSS
       oss_config['prefix'] || oss_bucket_url
     end
     
+    def self.use_asset_id?
+      !!oss_config['asset_id']
+    end
+    
     def self.oss_bucket_url
       "http://#{oss_bucket}.oss.aliyuncs.com#{oss_folder ? "/#{oss_folder}" : '' }"
     end
@@ -43,9 +48,9 @@ module AssetOSS
       oss_folder ? "/#{oss_folder}#{asset.relative_path}" : asset.relative_path
     end
     
-    def self.upload(options={assetID: true})
+    def self.upload(options={assetID: use_asset_id?})
       Asset.init(:debug => options[:debug], :nofingerprint => options[:nofingerprint])
-      
+            
       assets = Asset.find
       return if assets.empty?
     
