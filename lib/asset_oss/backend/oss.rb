@@ -66,7 +66,7 @@ module AssetOSS
           :content_type => asset.mime_type,
         }.merge(asset.cache_headers)
         
-        asset.replace_css_images!(:prefix => oss_prefix) if asset.css?
+        asset.replace_css_images!(:prefix => oss_prefix) if asset.css? && options[:assetID]
         
         if asset.gzip_type?
           headers.merge!(asset.gzip_headers)
